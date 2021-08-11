@@ -18,6 +18,7 @@ const Autocomplete = ({
   questionCode,
   defaultValue,
   options,
+  allOptions,
   onChange,
   placeholder,
   ddEvent,
