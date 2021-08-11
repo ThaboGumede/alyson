@@ -37,13 +37,7 @@ const DataTable = ({ parentCode }) => {
         {tableActions && (
           <HStack>
             {tableActions.map(action => (
-              <Action
-                key={action}
-                size="md"
-                colorScheme="purple"
-                parentCode={parentCode}
-                code={action}
-              />
+              <Action key={action} size="md" parentCode={parentCode} code={action} />
             ))}
           </HStack>
         )}

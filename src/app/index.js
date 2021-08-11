@@ -23,7 +23,6 @@ const App = () => {
               </Suspense>
             )}
           />
-          <Route path={`/public`} exact component={() => <Redirect to={{ pathname: '/home' }} />} />
           <Route path={'/*'} component={() => <Redirect to={{ pathname: '/home' }} />} />
         </Switch>
       </BrowserRouter>

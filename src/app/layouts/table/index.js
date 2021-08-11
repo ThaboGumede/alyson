@@ -6,7 +6,6 @@ const TableWrapper = () => {
   const table = useSelector(selectTable)
 
   if (!table) return null
-
   return <Table parentCode={table} />
 }
 

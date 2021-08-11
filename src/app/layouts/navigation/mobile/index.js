@@ -26,18 +26,11 @@ import { faPlus, faBolt, faBars } from '@fortawesome/free-solid-svg-icons'
 import Buttons from 'app/ASKS/buttons'
 import { onSendMessage } from 'vertx'
 import Drafts from '../drafts/Drafts'
-import { caps, hideQuickAdd } from 'config/caps'
-import { useSelector } from 'react-redux'
-import { selectCode } from 'redux/db/selectors'
-import getUserType from 'utils/helpers/get-user-type'
 
 const MobileNav = () => {
   const theme = useTheme()
   const bg = useColorModeValue(theme.colors.background.light, theme.colors.primary[900])
   const color = useColorModeValue(theme.colors.text.light, theme.colors.text.dark)
-
-  const userCode = useSelector(selectCode('USER'))
-  const userType = getUserType(useSelector(selectCode(userCode)))
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
@@ -92,22 +85,6 @@ const MobileNav = () => {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader>
-              <HStack spacing="5">
-                <AskMenu
-                  onClose={onClose}
-                  questionCode={'QUE_ADD_ITEMS_GRP'}
-                  icon={<Button leftIcon={<FontAwesomeIcon icon={faPlus} />}>Add</Button>}
-                />
-                {!caps(userType)(hideQuickAdd) && (
-                  <AskMenu
-                    onClose={onClose}
-                    questionCode={'QUE_QUICK_ADD_ITEMS_GRP'}
-                    icon={<Button leftIcon={<FontAwesomeIcon icon={faBolt} />}>Quick Add</Button>}
-                  />
-                )}
-              </HStack>
-            </DrawerHeader>
             <DrawerBody mt="4">
               <Buttons onClick={onClose} questionCode={'QUE_PROJECT_SIDEBAR_GRP'} />
               <Text textStyle="tail.2" style={{ position: 'absolute', bottom: 5 }}>

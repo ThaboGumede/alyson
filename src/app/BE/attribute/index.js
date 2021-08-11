@@ -14,7 +14,6 @@ import RichText from 'app/DTT/rich_text'
 import Select from 'app/DTT/select'
 import Video from 'app/DTT/video'
 import Address from 'app/DTT/address'
-import ABN from 'app/DTT/abn'
 import URL from 'app/DTT/url'
 import Rating from 'app/DTT/rating'
 import TimeZonePicker from 'app/DTT/time_zone'
@@ -81,8 +80,6 @@ const Attribute = ({
     <Video.Read mini={mini} dataType={dttData} data={data} styles={styles} config={config} />
   ) : component === 'address' ? (
     <Address.Read data={data} config={config} />
-  ) : component === 'abn_number' ? (
-    <ABN.Read data={data} />
   ) : component === 'link' ? (
     <URL.Read data={data} />
   ) : component === 'rating' ? (

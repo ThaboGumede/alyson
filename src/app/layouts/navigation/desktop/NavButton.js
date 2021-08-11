@@ -6,8 +6,6 @@ import { pathOr } from 'ramda'
 import { useSelector } from 'react-redux'
 import { selectLastSent } from 'redux/app/selectors'
 import { selectCode } from 'redux/db/selectors'
-import icons from 'utils/icons'
-import labels from 'utils/labels'
 
 const NavButton = ({ code, questionCode }) => {
   const data = useSelector(selectCode(questionCode, code))
@@ -31,9 +29,9 @@ const NavButton = ({ code, questionCode }) => {
         color={lastCode === code ? 'primary.500' : 'grey'}
         onClick={handleClick}
       >
-        <FontAwesomeIcon size="lg" icon={icons[code]} />
+        <FontAwesomeIcon size="lg" />
         <Text fontSize="xs" textStyle="tail2">
-          {labels[code]}
+          {data.name}
         </Text>
       </VStack>
     )
@@ -42,9 +40,9 @@ const NavButton = ({ code, questionCode }) => {
     <Menu>
       <MenuButton opacity={0.8} _hover={{ opacity: 1 }} test-id={code}>
         <VStack color="grey" test-id={code}>
-          <FontAwesomeIcon size="lg" icon={icons[code]} />
+          <FontAwesomeIcon size="lg" />
           <HStack spacing={0.5}>
-            <Text fontSize="xs">{labels[code]}</Text>
+            <Text fontSize="xs">{data.name}</Text>
             <FontAwesomeIcon icon={faCaretDown} />
           </HStack>
         </VStack>

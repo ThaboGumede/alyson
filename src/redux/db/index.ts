@@ -64,7 +64,6 @@ const db = createSlice({
         return
       }
       if (data_type === 'Note') {
-        if (linkedApps) state[`${code}@linkedApps`] = split(',', linkedApps)
         forEach(formatNotes(state), items as Array<Note>)
         return
       }

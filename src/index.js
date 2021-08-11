@@ -7,10 +7,7 @@ import App from 'app'
 import { ColorModeScript, ChakraProvider } from '@chakra-ui/react'
 import { Fonts } from 'config/fonts'
 import Loading from 'keycloak/loading'
-// import LogRocket from 'logrocket'
 import Error from 'error'
-
-// LogRocket.init('put your logrocket identifier to use')
 
 const initialiseApp = async () => {
   try {
@@ -41,4 +38,3 @@ const initialiseApp = async () => {
 }
 
 initialiseApp()
-// reportWebVitals()

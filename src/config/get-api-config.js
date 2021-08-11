@@ -1,6 +1,8 @@
+import { includes } from 'ramda'
 import axios from 'axios'
 import Keycloak from 'keycloak-js'
 import { INIT_URL } from './genny'
+import loginAsGuest from '../keycloak/login-as-guest'
 import getTokenFromURL from 'keycloak/get-token-from-url'
 import getTheme from 'config/theme'
 import setupGoogleApi from './setup-google-api'
@@ -21,12 +23,6 @@ const getApiConfig = async () => {
 
   apiConfig = response.data
 
-  /* Log Rocket */
-  // if (process.env.NODE_ENV !== 'development') {
-  //   LogRocket.init('ur logrocket key', { release: apiConfig.realm })
-  //   setupLogRocketReact(LogRocket)
-  // }
-
   /* Keycloak */
   keycloak = new Keycloak({
     realm: apiConfig.realm,
@@ -34,9 +30,9 @@ const getApiConfig = async () => {
     clientId: 'alyson',
   })
 
-  // if (includes('public', window.location.pathname)) {
-  //   guestKeycloak = await loginAsGuest()
-  // }
+  if (includes('public', window.location.pathname)) {
+    guestKeycloak = await loginAsGuest()
+  }
 
   tokenFromUrl = getTokenFromURL(keycloak)
 

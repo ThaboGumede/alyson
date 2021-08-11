@@ -9,9 +9,7 @@ import Toast from './toast'
 import Detail from 'app/SBE/detail'
 import Navigation from '../navigation'
 import DeveloperConsole, { isDev } from 'utils/developer'
-import LogrocketIdentifier from '../components/logrocket_identifier'
 import ErrorBoundary from 'utils/developer/ErrorBoundary'
-import Notes from 'app/NOTE'
 import { onSendMessage } from 'vertx'
 import { useSelector } from 'react-redux'
 import { selectDisplay } from 'redux/app/selectors'
@@ -43,21 +41,18 @@ const Display = () => {
       >
         <Navigation />
         <Box paddingTop="6rem">
-          {/* <Timeout /> */}
           {display === 'DASHBOARD' && <Dashboard />}
           {display === 'TABLE' && <Table />}
           {display === 'PROCESS' && <Process />}
           {includes('FORM', display || '') && <Form />}
           {display === 'DETAIL' && <Detail />}
           {display === 'MAP' && <Table mapSearch />}
-          {display === 'NOTES' && <Notes />}
-
           <DisplayDrawer />
           <Dialog />
           <Toast />
         </Box>
         {isDev ? <DeveloperConsole /> : null}
-        <LogrocketIdentifier />
+        {/* <LogrocketIdentifier /> */}
       </Box>
     </ErrorBoundary>
   )

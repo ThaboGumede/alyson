@@ -43,7 +43,7 @@ const ProcessSearch = ({ sbeCode, process, placeholder }) => {
       <form onSubmit={handleSubmit}>
         <InputGroup w="xs" maxW="50vw">
           <InputLeftElement>
-            <FontAwesomeIcon color="lightgrey" icon={faSearch} />
+            <FontAwesomeIcon icon={faSearch} />
           </InputLeftElement>
           <Input
             placeholder={placeholder}
@@ -56,7 +56,6 @@ const ProcessSearch = ({ sbeCode, process, placeholder }) => {
           <InputRightElement>
             <IconButton
               variant="ghost"
-              colorScheme="primary"
               ref={clearRef}
               icon={<FontAwesomeIcon color="lightgrey" icon={faTimes} />}
               onClick={handleClear}
@@ -69,17 +68,12 @@ const ProcessSearch = ({ sbeCode, process, placeholder }) => {
       <Button
         onClick={handleSubmit}
         leftIcon={<FontAwesomeIcon icon={faSearch} />}
-        colorScheme="primary"
         test-id={`process-view-search`}
       >
         Search
       </Button>
       {search && (
-        <Button
-          onClick={handleClear}
-          leftIcon={<FontAwesomeIcon icon={faTimes} />}
-          colorScheme="secondary"
-        >
+        <Button onClick={handleClear} leftIcon={<FontAwesomeIcon icon={faTimes} />}>
           Clear Search
         </Button>
       )}

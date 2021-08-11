@@ -23,7 +23,7 @@ const Search = () => {
           role="search"
           onClick={handleSubmit}
         >
-          Search all of Internmatch
+          Search everywhere
         </Button>
       </VStack>
     </form>

@@ -28,7 +28,6 @@ import TimeRange from 'app/DTT/time_range'
 import HtmlDisplay from 'app/DTT/html_display'
 import Signature from 'app/DTT/signature'
 import URL from 'app/DTT/url'
-import ABN from 'app/DTT/abn'
 import Rating from 'app/DTT/rating'
 import ThirdPartyVideo from 'app/DTT/third_party_video'
 import TimeZonePicker from 'app/DTT/time_zone'
@@ -184,6 +183,7 @@ const Ask = ({
           dataType={dataType}
           data={data}
           label={name}
+          parentCode={parentCode}
         />
       )}
       {component === 'radio' && (
@@ -262,14 +262,6 @@ const Ask = ({
       )}
       {component === 'link' && (
         <URL.Write questionCode={questionCode} data={data} onSendAnswer={onSendAnswer} />
-      )}
-      {component === 'abn_number' && (
-        <ABN.Write
-          disabled={disabled}
-          questionCode={questionCode}
-          data={data}
-          onSendAnswer={onSendAnswer}
-        />
       )}
       {component === 'rating' && (
         <Rating.Write data={data} questionCode={questionCode} onSendAnswer={onSendAnswer} />
