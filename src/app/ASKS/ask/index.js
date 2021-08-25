@@ -184,6 +184,7 @@ const Ask = ({
           dataType={dataType}
           data={data}
           label={name}
+          parentCode={parentCode}
         />
       )}
       {component === 'radio' && (
@@ -194,6 +195,7 @@ const Ask = ({
           onSendAnswer={onSendAnswer}
           data={data}
           mandatory={mandatory}
+          parentCode={parentCode}
         />
       )}
       {component === 'text' && (
