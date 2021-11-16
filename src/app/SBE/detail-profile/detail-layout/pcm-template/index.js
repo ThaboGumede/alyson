@@ -6,8 +6,8 @@ import { useBoolean } from '@chakra-ui/hooks'
 import { selectRows } from 'redux/db/selectors'
 import { useIsMobile } from 'utils/hooks'
 import 'app/layouts/components/css/hide-scroll.css'
-import DesktopView from 'app/SBE/detail-profile/detail-layout/intern/detail-sections/desktop/index.js'
-import MobileView from 'app/SBE/detail-profile/detail-layout/intern/detail-sections/mobile/index.js'
+import DesktopView from 'app/SBE/detail-profile/detail-layout/pcm-template/detail-sections/desktop'
+import MobileView from 'app/SBE/detail-profile/detail-layout/pcm-template/detail-sections/mobile'
 
 const DetailLayoutIntern = ({ sbeCode, targetCode }) => {
   const rows = useSelector(selectRows(sbeCode))
