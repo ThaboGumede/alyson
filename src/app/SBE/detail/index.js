@@ -21,8 +21,11 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
   const beCode = head(useSelector(selectCode(code, 'rows')) || [targetCode])
 
   if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
-  if (displayType === 'CV') {
+  if (displayType === 'DEFAULT_TEMPLATE') {
     return <PCMTemplate sbeCode={code} targetCode={beCode} />
+  }
+  if (displayType === 'CV') {
+    return <Intern sbeCode={code} targetCode={beCode} />
   }
 
   if (displayType === 'COMPANY') {

@@ -20,7 +20,7 @@ const DisplayDrawer = () => {
     <Drawer size={size} placement="bottom" isOpen={isOpen} onClose={() => dispatch(closeDrawer())}>
       <DrawerOverlay>
         <DrawerContent w={w} ml={ml} borderTopRadius="lg">
-          {drawer === 'DETAIL' && <Detail />}
+          {(drawer === 'DETAIL' || drawer === 'TEMPLATE') && <Detail />}
           {drawer === 'NOTES' && <Notes />}
         </DrawerContent>
       </DrawerOverlay>
