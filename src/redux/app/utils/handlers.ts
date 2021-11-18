@@ -9,6 +9,7 @@ const displayMachine: {
   [key: string]: Function
 } = {
   'DRAWER:DETAIL': (state: AppState) => (state['DRAWER'] = 'DETAIL'),
+  'DRAWER:TEMPLATE': (state: AppState) => (state['DRAWER'] = 'TEMPLATE'),
   DIALOG_FORM: (state: AppState) => (state['DIALOG'] = 'FORM'),
   NONE: (state: AppState) => {
     state.DIALOG = 'NONE'
