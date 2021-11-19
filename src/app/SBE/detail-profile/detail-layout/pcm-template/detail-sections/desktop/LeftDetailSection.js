@@ -10,6 +10,7 @@ const LeftDetail = ({
   positionThree = 'PRI_LINKEDIN_URL',
   positionFour = 'PRI_EMAIL',
   positionFive = 'PRI_MOBILE',
+  positionFromAttribute,
 }) => {
   const cardBg = useColorModeValue('gray.200', 'gray.600')
 

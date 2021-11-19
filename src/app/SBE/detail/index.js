@@ -11,16 +11,7 @@ import DefaultView from './default-view'
 import getDetailType from './helpers/get-detail-type'
 import Application from 'app/SBE/detail-profile/application'
 import PCMTemplate from 'app/SBE/detail-profile/pcm-template'
-import { head, compose, map } from 'ramda'
-
-const useGetBaseEntityAttributes = (beCode, attributeCode) =>
-  useSelector(selectCode(beCode, attributeCode))
-
-const allBaseEntityAttributes = code => getBaseEntityAttributes => attributeList => {
-  return attributeList?.reduce((acc, val) => {
-    return (acc = acc.concat(getBaseEntityAttributes(code, val)))
-  }, [])
-}
+import { head, compose, map, includes, filter } from 'ramda'
 
 const BaseEntityDetail = ({ targetCode, defaultView }) => {
   const code = useSelector(selectDetail)
@@ -28,23 +19,22 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
   const displayType = getDetailType(displayMode?.value)
 
   const beCode = head(useSelector(selectCode(code, 'rows')) || [targetCode])
-  const allAttributesList = useSelector(selectCode(beCode))
-
-  const allAttributeValues = allBaseEntityAttributes(beCode)(useGetBaseEntityAttributes)(
-    allAttributesList,
-  )
+  const allAttributesList = useSelector(selectCode(beCode, 'allAttributes'))
 
   const positionFromAttribute = compose(
     map(({ attributeCode, value }) => ({ code: attributeCode, position: value })),
-  )(allAttributeValues || [])
-
-  console.log('%c DROPDOWN---->', 'color: red; font-size: 20px', {
-    positionFromAttribute,
-  })
+    filter(({ attributeCode }) => includes('PRI_')(attributeCode)),
+  )(allAttributesList || [])
 
   if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
   if (displayType === 'DEFAULT_TEMPLATE') {
-    return <PCMTemplate sbeCode={code} targetCode={beCode} />
+    return (
+      <PCMTemplate
+        sbeCode={code}
+        targetCode={beCode}
+        positionFromAttribute={positionFromAttribute}
+      />
+    )
   }
   if (displayType === 'CV') {
     return <Intern sbeCode={code} targetCode={beCode} />

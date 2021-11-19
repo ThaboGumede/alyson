@@ -9,7 +9,7 @@ import 'app/layouts/components/css/hide-scroll.css'
 import DesktopView from 'app/SBE/detail-profile/detail-layout/pcm-template/detail-sections/desktop'
 import MobileView from 'app/SBE/detail-profile/detail-layout/pcm-template/detail-sections/mobile'
 
-const DetailLayoutIntern = ({ sbeCode, targetCode }) => {
+const PcmTemplate = ({ sbeCode, targetCode, positionFromAttribute }) => {
   const rows = useSelector(selectRows(sbeCode))
   const beCode = targetCode ? targetCode : rows?.length ? rows[0] : null
   const isMobile = useIsMobile()
@@ -37,6 +37,7 @@ const DetailLayoutIntern = ({ sbeCode, targetCode }) => {
           onScroll={onScroll}
           onWheel={onWheel}
           mini={mini}
+          positionFromAttribute
         />
       ) : (
         <DesktopView
@@ -45,9 +46,10 @@ const DetailLayoutIntern = ({ sbeCode, targetCode }) => {
           onScroll={onScroll}
           onWheel={onWheel}
           mini={mini}
+          positionFromAttribute
         />
       )}
     </>
   )
 }
-export default DetailLayoutIntern
+export default PcmTemplate
