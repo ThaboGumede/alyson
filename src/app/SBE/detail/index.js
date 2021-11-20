@@ -22,22 +22,30 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
   const allAttributesList = useSelector(selectCode(beCode, 'allAttributes'))
 
   const positionFromAttribute = compose(
-    map(({ attributeCode, value }) => ({ code: attributeCode, position: value })),
+    map(({ attributeCode, value }) => ({ attributeCode: attributeCode, position: value })),
     filter(({ attributeCode }) => includes('PRI_')(attributeCode)),
   )(allAttributesList || [])
 
   if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
-  if (displayType === 'DEFAULT_TEMPLATE') {
+  if (displayType === 'CV') {
     return (
       <PCMTemplate
         sbeCode={code}
         targetCode={beCode}
         positionFromAttribute={positionFromAttribute}
+        allAttributesList={allAttributesList}
       />
     )
   }
   if (displayType === 'CV') {
-    return <Intern sbeCode={code} targetCode={beCode} />
+    return (
+      <PCMTemplate
+        sbeCode={code}
+        targetCode={beCode}
+        positionFromAttribute={positionFromAttribute}
+        allAttributesList={allAttributesList}
+      />
+    )
   }
 
   if (displayType === 'COMPANY') {

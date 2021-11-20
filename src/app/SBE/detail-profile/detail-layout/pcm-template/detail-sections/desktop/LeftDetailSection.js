@@ -2,17 +2,24 @@ import 'app/layouts/components/css/hide-scroll.css'
 import { Box, VStack } from '@chakra-ui/layout'
 import Attribute from 'app/BE/attribute'
 import { useColorModeValue } from '@chakra-ui/color-mode'
+import { map, equals } from 'ramda'
 
 const LeftDetail = ({
   beCode,
+  positionFromAttribute,
+  allAttributesList,
   positionOne = 'PRI_IMAGE_URL',
   positionTwo = 'PRI_NAME',
   positionThree = 'PRI_LINKEDIN_URL',
   positionFour = 'PRI_EMAIL',
   positionFive = 'PRI_MOBILE',
-  positionFromAttribute,
 }) => {
   const cardBg = useColorModeValue('gray.200', 'gray.600')
+
+  console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
+    allAttributesList,
+    positionFromAttribute,
+  })
 
   return (
     <Box
@@ -26,12 +33,11 @@ const LeftDetail = ({
       <VStack align="start" spacing={8} alignItems="center" pt="10">
         <Attribute code={beCode} config={{ h: '15rem', w: '15rem' }} attribute={positionOne} />
         <VStack align="start" spacing={4}>
-          <VStack spacing={5}>
-            <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={positionTwo} />
-            <Attribute config={{ color: '#3182CE' }} code={beCode} attribute={positionThree} />
-            <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={positionFour} />
-            <Attribute config={{ color: '#3182CE' }} code={beCode} attribute={positionFive} />
-          </VStack>
+          {map(({ attributeCode }) => (
+            <VStack key={attributeCode}>
+              <Attribute code={beCode} attribute={attributeCode} />
+            </VStack>
+          ))(allAttributesList)}
         </VStack>
       </VStack>
     </Box>
