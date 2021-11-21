@@ -2,7 +2,8 @@ import 'app/layouts/components/css/hide-scroll.css'
 import { Box, VStack } from '@chakra-ui/layout'
 import Attribute from 'app/BE/attribute'
 import { useColorModeValue } from '@chakra-ui/color-mode'
-import { map, equals } from 'ramda'
+import { map } from 'ramda'
+import { HStack, Text } from '@chakra-ui/react'
 
 const LeftDetail = ({
   beCode,
@@ -22,23 +23,16 @@ const LeftDetail = ({
   })
 
   return (
-    <Box
-      bg={cardBg}
-      borderRadius="2rem 2rem 0rem 0rem"
-      h="100vh"
-      position="sticky"
-      top="0rem"
-      minW="20vw"
-    >
+    <Box bg={cardBg} borderRadius="2rem 2rem 0rem 0rem" h="100vh" minW="20vw" overflowY="scroll">
       <VStack align="start" spacing={8} alignItems="center" pt="10">
-        <Attribute code={beCode} config={{ h: '15rem', w: '15rem' }} attribute={positionOne} />
-        <VStack align="start" spacing={4}>
-          {map(({ attributeCode }) => (
-            <VStack key={attributeCode}>
+        {map(({ attributeCode }) => (
+          <VStack key={attributeCode}>
+            <HStack>
+              <Text>{`${attributeCode}---------->`}</Text>
               <Attribute code={beCode} attribute={attributeCode} />
-            </VStack>
-          ))(allAttributesList)}
-        </VStack>
+            </HStack>
+          </VStack>
+        ))(allAttributesList)}
       </VStack>
     </Box>
   )

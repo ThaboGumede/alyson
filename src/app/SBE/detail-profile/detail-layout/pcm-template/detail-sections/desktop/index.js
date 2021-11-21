@@ -12,7 +12,7 @@ const DesktopView = ({
   allAttributesList,
 }) => {
   return (
-    <Box className="nobar" overflowY="scroll" onScroll={onScroll} onWheel={onWheel}>
+    <Box>
       <LeftDetailSection
         beCode={beCode}
         sbeCode={sbeCode}
