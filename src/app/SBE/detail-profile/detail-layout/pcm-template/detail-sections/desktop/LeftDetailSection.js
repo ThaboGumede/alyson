@@ -25,14 +25,20 @@ const LeftDetail = ({
   return (
     <Box bg={cardBg} borderRadius="2rem 2rem 0rem 0rem" h="100vh" minW="20vw" overflowY="scroll">
       <VStack align="start" spacing={8} alignItems="center" pt="10">
+        <VStack spacing={5} bg="pink" p="4">
+          <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={positionTwo} />
+          <Attribute config={{ color: '#3182CE' }} code={beCode} attribute={positionThree} />
+          <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={positionFour} />
+          <Attribute config={{ color: '#3182CE' }} code={beCode} attribute={positionFive} />
+        </VStack>
         {map(({ attributeCode }) => (
-          <VStack key={attributeCode}>
-            <HStack>
+          <VStack key={attributeCode} w="60vw">
+            <VStack w="100%" bg="gold" p="4">
               <Text>{`${attributeCode}---------->`}</Text>
               <Attribute code={beCode} attribute={attributeCode} />
-            </HStack>
+            </VStack>
           </VStack>
-        ))(allAttributesList)}
+        ))(allAttributesList || [])}
       </VStack>
     </Box>
   )
