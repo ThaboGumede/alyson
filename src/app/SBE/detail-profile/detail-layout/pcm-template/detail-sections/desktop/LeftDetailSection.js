@@ -3,7 +3,7 @@ import { Box, VStack } from '@chakra-ui/layout'
 import Attribute from 'app/BE/attribute'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { map } from 'ramda'
-import { HStack, Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
 const LeftDetail = ({
   beCode,
