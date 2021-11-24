@@ -26,6 +26,11 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
     filter(({ attributeCode }) => includes('PRI_')(attributeCode)),
   )(allAttributesList || [])
 
+  console.log('%c allAttributesList----->', 'color: tomato; font-size: 20px', {
+    allAttributesList,
+    positionFromAttribute,
+  })
+
   if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
   if (displayType === 'CV') {
     return (
