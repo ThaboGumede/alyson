@@ -2,7 +2,7 @@ import 'app/layouts/components/css/hide-scroll.css'
 import { Box, VStack } from '@chakra-ui/layout'
 import Attribute from 'app/BE/attribute'
 import { useColorModeValue } from '@chakra-ui/color-mode'
-import { map } from 'ramda'
+import { map, reduce, includes } from 'ramda'
 import { Text as CText } from '@chakra-ui/react'
 import ImageType from 'app/DTT/upload/Image'
 import Social from 'app/DTT/social'
@@ -20,9 +20,22 @@ const LeftDetail = ({ beCode, positionFromAttribute, allAttributesList }) => {
     positionFive: 'PRI_MOBILE',
   }
 
+  // console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
+  //   allAttributesList,
+  //   positionFromAttribute,
+  // })
+
+  const usedAttributes = Object.values(mapped)
+
+  const filteredAttributes = reduce((acc, attributeList) => {
+    const { attributeCode } = attributeList
+    acc = !includes(attributeCode)(usedAttributes) ? acc.concat(attributeList) : acc
+    return acc
+  }, [])(allAttributesList)
+
   console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
-    allAttributesList,
-    positionFromAttribute,
+    usedAttributes,
+    filteredAttributes,
   })
 
   const { positionOne, positionTwo, positionThree, positionFour, positionFive } = mapped
@@ -48,7 +61,7 @@ const LeftDetail = ({ beCode, positionFromAttribute, allAttributesList }) => {
               <Attribute code={beCode} attribute={attributeCode} />
             </VStack>
           </VStack>
-        ))(allAttributesList || [])}
+        ))(filteredAttributes || [])}
       </VStack>
     </Box>
   )
