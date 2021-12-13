@@ -9,7 +9,7 @@ import Social from 'app/DTT/social'
 import Text from 'app/DTT/text'
 import Video from 'app/DTT/video'
 
-const LeftDetail = ({ beCode, positionFromAttribute, allAttributesList }) => {
+const LeftDetail = ({ beCode, allAttributesList }) => {
   const cardBg = useColorModeValue('gray.200', 'gray.600')
 
   const mapped = {
@@ -27,16 +27,21 @@ const LeftDetail = ({ beCode, positionFromAttribute, allAttributesList }) => {
 
   const usedAttributes = Object.values(mapped)
 
-  const filteredAttributes = reduce((acc, attributeList) => {
-    const { attributeCode } = attributeList
-    acc = !includes(attributeCode)(usedAttributes) ? acc.concat(attributeList) : acc
-    return acc
-  }, [])(allAttributesList)
+  const getFilteredAttributes = (usedAttributesList, allAttributesList) => {
+    console.log('allAttributesList', { allAttributesList, usedAttributes })
+    return reduce((acc, attributeList) => {
+      const { attributeCode } = attributeList
+      acc = !includes(attributeCode)(usedAttributesList) ? acc.concat(attributeList) : acc
+      return acc
+    }, [])(allAttributesList || [])
+  }
 
-  console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
-    usedAttributes,
-    filteredAttributes,
-  })
+  const filteredAttributes = getFilteredAttributes(usedAttributes, allAttributesList)
+
+  // console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
+  //   usedAttributes,
+  //   filteredAttributes,
+  // })
 
   const { positionOne, positionTwo, positionThree, positionFour, positionFive } = mapped
 
