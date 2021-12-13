@@ -29,12 +29,11 @@ const DefaultCard = ({ parentCode, actions = [], code, columns }) => {
 
   const userCode = useSelector(selectCode('USER'), equals)
   const userType = getUserType(useSelector(selectCode(userCode), sameLength))
-  const moreVertIconColor = useSelector(selectCode(code, '_LNK_COMP_INTERNSHIP__PRI_COLOUR'))?.value
 
   return (
     <MotionBox w="full" whileHover={{ scale: 1.02 }} transition={{ duration: 0.1 }}>
       <Card
-        maxW={['80vw', '80vw', '22rem']}
+        // maxW={['80vw', '80vw', '22rem']}
         p={[2, 2, 2, 4]}
         variant="card1"
         {...(statusColor?.value &&
@@ -78,14 +77,7 @@ const DefaultCard = ({ parentCode, actions = [], code, columns }) => {
             code={code}
             parentCode={parentCode}
             button={
-              <Box
-                align="start"
-                border="1px"
-                borderColor="gray.200"
-                borderRadius="6px"
-                px="2"
-                bg={moreVertIconColor}
-              >
+              <Box align="start" border="1px" borderColor="gray.200" borderRadius="6px" px="2">
                 <FontAwesomeIcon icon={faEllipsisV} size="xs" />
               </Box>
             }

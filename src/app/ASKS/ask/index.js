@@ -29,6 +29,7 @@ import Select from 'app/DTT/select'
 import Signature from 'app/DTT/signature'
 import Social from 'app/DTT/social'
 import Text from 'app/DTT/text'
+import TextArea from 'app/DTT/text_area'
 import ThirdPartyVideo from 'app/DTT/third_party_video'
 import TimeRange from 'app/DTT/time_range'
 import TimeZonePicker from 'app/DTT/time_zone'
@@ -41,9 +42,9 @@ import { pathOr } from 'ramda'
 import { selectCode } from 'redux/db/selectors'
 import { selectHighlightedQuestion } from 'redux/app/selectors'
 import { useEffect } from 'react'
+import { useError } from 'utils/contexts/ErrorContext'
 import { useMobileValue } from 'utils/hooks'
 import { useSelector } from 'react-redux'
-import { useError } from 'utils/contexts/ErrorContext'
 
 const Ask = ({
   parentCode,
@@ -70,6 +71,7 @@ const Ask = ({
     hidden,
     disabled,
     readonly,
+    placeholder,
   } = askData || {}
 
   const data = useSelector(selectCode(targetCode, attributeCode)) || {}
@@ -237,6 +239,16 @@ const Ask = ({
           errorMessage={errorMessage}
         />
       )}
+      {component === 'textarea' && (
+        <TextArea.Write
+          questionCode={questionCode}
+          mandatory={mandatory}
+          data={data}
+          onSendAnswer={onSendAnswer}
+          regexPattern={regexPattern}
+          errorMessage={errorMessage}
+        />
+      )}
       {component === 'social' && (
         <Social.Write
           questionCode={questionCode}
@@ -277,6 +289,7 @@ const Ask = ({
           html={html}
           regexPattern={regexPattern}
           errorMessage={errorMessage}
+          placeholder={placeholder}
         />
       )}
       {component === 'date_range' && (

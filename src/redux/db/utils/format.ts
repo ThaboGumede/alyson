@@ -45,6 +45,8 @@ export const formatBaseEntity = (
       const valueKey = compose(find(includes('value')), keys)(attribute) as string
 
       attribute = { value: attribute[valueKey], ...attribute }
+    } else {
+      attribute = { ...attribute }
     }
     attribute.created = ''
 
@@ -71,6 +73,10 @@ export const formatAsk = (state: DBState, replace: Boolean) => (item: Item) => {
 
   if (!childAsks.length) {
     initialiseKey(state, `${questionCode}@raw`, item)
+  }
+
+  if (childAsks.length) {
+    initialiseKey(state, `${questionCode}@wholeData`, childAsks)
   }
 
   forEach((childAsk: Keyable) => {

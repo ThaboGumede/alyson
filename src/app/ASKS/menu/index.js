@@ -1,15 +1,22 @@
-import { useSelector } from 'react-redux'
-import { selectCode } from 'redux/db/selectors'
-import { Menu, MenuButton, MenuList, VStack, HStack, Text, MenuItem } from '@chakra-ui/react'
+import { HStack, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import icons from 'utils/icons'
+import { map } from 'ramda'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import sendAskClick from '../utils/send-ask-click'
+import { useSelector } from 'react-redux'
+
+import icons from 'utils/icons'
 import labels from 'utils/labels'
+import { selectCode } from 'redux/db/selectors'
+import sendAskClick from '../utils/send-ask-click'
 import { useIsMobile } from 'utils/hooks'
 
 const AsksMenu = ({ questionCode }) => {
   const data = useSelector(selectCode(questionCode))
+  const wholeData = useSelector(selectCode(questionCode, 'wholeData'))
+  const labelsAndQuestionCode = map(({ questionCode, name }) => ({
+    label: name,
+    code: questionCode,
+  }))(wholeData || [])
 
   const isMobile = useIsMobile()
 
@@ -29,17 +36,17 @@ const AsksMenu = ({ questionCode }) => {
         </VStack>
       </MenuButton>
       <MenuList>
-        {data?.map(childAsk => (
+        {map(({ label, code }) => (
           <MenuItem
             onClick={() => {
-              sendAskClick(questionCode, childAsk)
+              sendAskClick(questionCode, code)
             }}
-            test-id={childAsk}
-            key={childAsk}
+            test-id={code}
+            key={code}
           >
-            {labels[childAsk]}
+            {label}
           </MenuItem>
-        ))}
+        ))(labelsAndQuestionCode || [])}
       </MenuList>
     </Menu>
   )
