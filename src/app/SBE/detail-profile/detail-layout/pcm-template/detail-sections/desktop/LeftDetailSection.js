@@ -9,22 +9,23 @@ import Social from 'app/DTT/social'
 import Text from 'app/DTT/text'
 import Video from 'app/DTT/video'
 
-const LeftDetail = ({
-  beCode,
-  positionFromAttribute,
-  allAttributesList,
-  positionOne = 'PRI_IMAGE_URL',
-  positionTwo = 'PRI_NAME',
-  positionThree = 'PRI_LINKEDIN_URL',
-  positionFour = 'PRI_EMAIL',
-  positionFive = 'PRI_MOBILE',
-}) => {
+const LeftDetail = ({ beCode, positionFromAttribute, allAttributesList }) => {
   const cardBg = useColorModeValue('gray.200', 'gray.600')
 
-  // console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
-  //   allAttributesList,
-  //   positionFromAttribute,
-  // })
+  const mapped = {
+    positionOne: 'PRI_IMAGE_URL',
+    positionTwo: 'PRI_NAME',
+    positionThree: 'PRI_LINKEDIN_URL',
+    positionFour: 'PRI_EMAIL',
+    positionFive: 'PRI_MOBILE',
+  }
+
+  console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
+    allAttributesList,
+    positionFromAttribute,
+  })
+
+  const { positionOne, positionTwo, positionThree, positionFour, positionFive } = mapped
 
   return (
     <Box bg={cardBg} borderRadius="2rem 2rem 0rem 0rem" h="100vh" minW="20vw" overflowY="scroll">
