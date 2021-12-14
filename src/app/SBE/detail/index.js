@@ -32,7 +32,7 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
   // })
 
   if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
-  if (displayType === 'CV') {
+  if (displayType === 'TPL_CARD_1') {
     return (
       <PCMTemplate
         sbeCode={code}
