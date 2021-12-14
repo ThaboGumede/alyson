@@ -10,6 +10,7 @@ const DesktopView = ({
   onWheel,
   positionFromAttribute,
   allAttributesList,
+  display,
 }) => {
   return (
     <Box>
@@ -18,6 +19,7 @@ const DesktopView = ({
         sbeCode={sbeCode}
         positionFromAttribute={positionFromAttribute}
         allAttributesList={allAttributesList}
+        display={display}
       />
     </Box>
   )

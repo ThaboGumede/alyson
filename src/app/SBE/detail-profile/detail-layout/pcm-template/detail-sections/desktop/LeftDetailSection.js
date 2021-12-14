@@ -3,15 +3,18 @@ import { Box, VStack } from '@chakra-ui/layout'
 import Attribute from 'app/BE/attribute'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { map, reduce, includes } from 'ramda'
-import { Text as CText } from '@chakra-ui/react'
+import { Text as CText, Button, Collapse } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
 import { selectCode } from 'redux/db/selectors'
+import { useDisclosure } from '@chakra-ui/react'
+import { Fade, ScaleFade, Slide, SlideFade } from '@chakra-ui/react'
 
-const LeftDetail = ({ beCode, allAttributesList }) => {
+const LeftDetail = ({ beCode, allAttributesList, display }) => {
+  const { isOpen, onToggle } = useDisclosure()
+
   const cardBg = useColorModeValue('gray.200', 'gray.600')
 
-  const getPcmCode = 'PCM_TEST1'
-
+  const getPcmCode = display
   const testPcm = useSelector(selectCode(getPcmCode, 'allAttributes'))
   const mappedPcm = reduce((acc, { attributeCode, valueString }) => {
     acc = { ...acc, [attributeCode]: valueString }
@@ -20,7 +23,7 @@ const LeftDetail = ({ beCode, allAttributesList }) => {
 
   const usedAttributes = Object.values(mappedPcm)
 
-  console.log('testPcm---->', { testPcm, mappedPcm })
+  console.log('testPcm---->', { testPcm, mappedPcm, getPcmCode })
 
   const getFilteredAttributes = (usedAttributesList, allAttributesList) => {
     return reduce((acc, attributeList) => {
@@ -43,14 +46,19 @@ const LeftDetail = ({ beCode, allAttributesList }) => {
           <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={PRI_LOC3} />
           <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={PRI_LOC4} />
         </VStack>
-        {map(({ attributeCode, attributeName }) => (
-          <VStack key={attributeCode} w="60vw">
-            <VStack w="100%" bg="gold" p="4">
-              <CText>{attributeName}</CText>
-              <Attribute code={beCode} attribute={attributeCode} />
-            </VStack>
-          </VStack>
-        ))(filteredAttributes || [])}
+        <Button onClick={onToggle}>Remaining attributes</Button>
+        <Collapse in={isOpen} animateOpacity>
+          <Box p="40px" color="white" mt="4" bg="teal.500" rounded="md" shadow="md">
+            {map(({ attributeCode, attributeName }) => (
+              <VStack key={attributeCode} w="60vw">
+                <VStack w="100%" bg="gold" p="4">
+                  <CText>{attributeName}</CText>
+                  <Attribute code={beCode} attribute={attributeCode} />
+                </VStack>
+              </VStack>
+            ))(filteredAttributes || [])}
+          </Box>
+        </Collapse>
       </VStack>
     </Box>
   )

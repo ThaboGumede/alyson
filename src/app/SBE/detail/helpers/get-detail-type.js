@@ -1,5 +1,8 @@
-import { compose, prop, split } from 'ramda'
+import { compose, prop, split, includes } from 'ramda'
 
-const getDetailType = code => compose(prop(1), split(':'))(code || '')
+const getDetailType = code => {
+  console.log('code', code)
+  return includes(':', code) ? compose(prop(1), split(':'))(code || '') : code || ''
+}
 
 export default getDetailType

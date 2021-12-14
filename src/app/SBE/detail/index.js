@@ -13,10 +13,13 @@ import Application from 'app/SBE/detail-profile/application'
 import TemplateOne from 'app/SBE/detail-profile/pcm-template'
 import { head, compose, map, includes, filter } from 'ramda'
 
-const BaseEntityDetail = ({ targetCode, defaultView }) => {
+const BaseEntityDetail = ({ targetCode, defaultView, display }) => {
   const code = useSelector(selectDetail)
-  const displayMode = useSelector(selectCode(code, 'SCH_DISPLAY_MODE'))
-  const displayType = getDetailType(displayMode?.value)
+
+  // console.log('display', display)
+
+  // const displayMode = useSelector(selectCode(code, 'SCH_DISPLAY_MODE'))
+  // const displayType = getDetailType(displayMode?.value)
 
   const beCode = head(useSelector(selectCode(code, 'rows')) || [targetCode])
   const allAttributesList = useSelector(selectCode(beCode, 'allAttributes'))
@@ -33,13 +36,11 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
     positionFour: 'PRI_EMAIL',
     positionFive: 'PRI_MOBILE',
   }
-  // console.log('%c allAttributesList----->', 'color: tomato; font-size: 20px', {
-  //   allAttributesList,
-  //   positionFromAttribute,
-  // })
+  console.log('%c allAttributesList----->', 'color: tomato; font-size: 20px', {
+    display,
+  })
 
-  if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
-  if (displayType === 'TPL_CARD_1') {
+  if (display && includes('PCM_')(display)) {
     return (
       <TemplateOne
         sbeCode={code}
@@ -47,44 +48,46 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
         positionFromAttribute={positionFromAttribute}
         allAttributesList={allAttributesList}
         mapped={mapped}
+        display={display}
       />
     )
   }
+  if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
 
-  if (displayType === 'CV') {
-    return (
-      <TemplateOne
-        sbeCode={code}
-        targetCode={beCode}
-        positionFromAttribute={positionFromAttribute}
-        allAttributesList={allAttributesList}
-      />
-    )
-  }
+  // if (displayType === 'CV') {
+  //   return (
+  //     <Intern
+  //       sbeCode={code}
+  //       targetCode={beCode}
+  //       positionFromAttribute={positionFromAttribute}
+  //       allAttributesList={allAttributesList}
+  //     />
+  //   )
+  // }
 
-  if (displayType === 'COMPANY') {
-    return <Company sbeCode={code} targetCode={beCode} />
-  }
+  // if (displayType === 'COMPANY') {
+  //   return <Company sbeCode={code} targetCode={beCode} />
+  // }
 
-  if (displayType === 'INTERNSHIP') {
-    return <Internship sbeCode={code} targetCode={beCode} />
-  }
+  // if (displayType === 'INTERNSHIP') {
+  //   return <Internship sbeCode={code} targetCode={beCode} />
+  // }
 
-  if (displayType === 'APPLICATION') {
-    return <Application sbeCode={code} targetCode={beCode} />
-  }
+  // if (displayType === 'APPLICATION') {
+  //   return <Application sbeCode={code} targetCode={beCode} />
+  // }
 
-  if (displayType === 'REP') {
-    return <Rep sbeCode={code} targetCode={beCode} />
-  }
+  // if (displayType === 'REP') {
+  //   return <Rep sbeCode={code} targetCode={beCode} />
+  // }
 
-  if (displayType === 'AGENT') {
-    return <Agent sbeCode={code} targetCode={beCode} />
-  }
+  // if (displayType === 'AGENT') {
+  //   return <Agent sbeCode={code} targetCode={beCode} />
+  // }
 
-  if (displayType === 'EDU_PRO') {
-    return <EduProDetail sbeCode={code} targetCode={beCode} />
-  }
+  // if (displayType === 'EDU_PRO') {
+  //   return <EduProDetail sbeCode={code} targetCode={beCode} />
+  // }
 
   return <DefaultView sbeCode={code} targetCode={beCode} />
 }

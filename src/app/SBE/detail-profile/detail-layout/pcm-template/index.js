@@ -9,7 +9,13 @@ import 'app/layouts/components/css/hide-scroll.css'
 import DesktopView from 'app/SBE/detail-profile/detail-layout/pcm-template/detail-sections/desktop'
 import MobileView from 'app/SBE/detail-profile/detail-layout/pcm-template/detail-sections/mobile'
 
-const PcmTemplate = ({ sbeCode, targetCode, positionFromAttribute, allAttributesList }) => {
+const PcmTemplate = ({
+  sbeCode,
+  targetCode,
+  positionFromAttribute,
+  allAttributesList,
+  display,
+}) => {
   const rows = useSelector(selectRows(sbeCode))
   const beCode = targetCode ? targetCode : rows?.length ? rows[0] : null
   const isMobile = useIsMobile()
@@ -48,6 +54,7 @@ const PcmTemplate = ({ sbeCode, targetCode, positionFromAttribute, allAttributes
           mini={mini}
           positionFromAttribute={positionFromAttribute}
           allAttributesList={allAttributesList}
+          display={display}
         />
       )}
     </>

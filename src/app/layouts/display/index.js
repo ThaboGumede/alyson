@@ -25,6 +25,8 @@ import { useSelector } from 'react-redux'
 const Display = ({ title }) => {
   const display = useSelector(selectDisplay)
 
+  console.log('display----->', { display })
+
   const backgroundColor = useColorModeValue('gray.50', '')
   window.onpopstate = event => {
     try {
@@ -63,6 +65,7 @@ const Display = ({ title }) => {
           {display === 'PROCESS' && <Process />}
           {display === 'VIEW:ASK' && <DisplayForm />}
           {includes('FORM', display || '') && <Form />}
+          {includes('PCM_', display || '') && <Detail display={display} />}
           {display === 'DETAIL' && <Detail />}
           {display === 'MAP' && <Table mapSearch />}
           {display === 'NOTES' && <Notes />}
