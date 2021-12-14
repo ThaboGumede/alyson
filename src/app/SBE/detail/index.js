@@ -10,7 +10,7 @@ import EduProDetail from './edu_pro'
 import DefaultView from './default-view'
 import getDetailType from './helpers/get-detail-type'
 import Application from 'app/SBE/detail-profile/application'
-import PCMTemplate from 'app/SBE/detail-profile/pcm-template'
+import TemplateOne from 'app/SBE/detail-profile/pcm-template'
 import { head, compose, map, includes, filter } from 'ramda'
 
 const BaseEntityDetail = ({ targetCode, defaultView }) => {
@@ -26,25 +26,34 @@ const BaseEntityDetail = ({ targetCode, defaultView }) => {
     filter(({ attributeCode }) => includes('PRI_')(attributeCode)),
   )(allAttributesList || [])
 
+  const mapped = {
+    locationOne: 'PRI_IMAGE_URL',
+    positionTwo: 'PRI_NAME',
+    positionThree: 'PRI_LINKEDIN_URL',
+    positionFour: 'PRI_EMAIL',
+    positionFive: 'PRI_MOBILE',
+  }
   // console.log('%c allAttributesList----->', 'color: tomato; font-size: 20px', {
   //   allAttributesList,
   //   positionFromAttribute,
   // })
 
   if (defaultView) return <DefaultView sbeCode={code} targetCode={beCode} />
-  if (displayType === 'CV') {
+  if (displayType === 'TPL_CARD_1') {
     return (
-      <PCMTemplate
+      <TemplateOne
         sbeCode={code}
         targetCode={beCode}
         positionFromAttribute={positionFromAttribute}
         allAttributesList={allAttributesList}
+        mapped={mapped}
       />
     )
   }
+
   if (displayType === 'CV') {
     return (
-      <PCMTemplate
+      <TemplateOne
         sbeCode={code}
         targetCode={beCode}
         positionFromAttribute={positionFromAttribute}
