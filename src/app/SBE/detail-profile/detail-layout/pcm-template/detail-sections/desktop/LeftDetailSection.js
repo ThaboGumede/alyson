@@ -10,21 +10,15 @@ import { selectCode } from 'redux/db/selectors'
 const LeftDetail = ({ beCode, allAttributesList }) => {
   const cardBg = useColorModeValue('gray.200', 'gray.600')
 
-  const mapped = {
-    positionOne: 'PRI_IMAGE_URL',
-    positionTwo: 'PRI_NAME',
-    positionThree: 'PRI_LINKEDIN_URL',
-    positionFour: 'PRI_EMAIL',
-    positionFive: 'PRI_MOBILE',
-  }
+  const getPcmCode = 'PCM_TEST1'
 
-  const usedAttributes = Object.values(mapped)
-
-  const testPcm = useSelector(selectCode('PCM_TEST1', 'allAttributes'))
+  const testPcm = useSelector(selectCode(getPcmCode, 'allAttributes'))
   const mappedPcm = reduce((acc, { attributeCode, valueString }) => {
     acc = { ...acc, [attributeCode]: valueString }
     return acc
   }, {})(testPcm)
+
+  const usedAttributes = Object.values(mappedPcm)
 
   console.log('testPcm---->', { testPcm, mappedPcm })
 
@@ -38,8 +32,7 @@ const LeftDetail = ({ beCode, allAttributesList }) => {
 
   const filteredAttributes = getFilteredAttributes(usedAttributes, allAttributesList)
 
-  const { positionOne, positionTwo, positionThree, positionFour, positionFive } = mapped
-  const { PRI_LOC1, PRI_LOC2, PRI_LOC3 } = mappedPcm
+  const { PRI_LOC1, PRI_LOC2, PRI_LOC3, PRI_LOC4 } = mappedPcm
 
   return (
     <Box bg={cardBg} borderRadius="2rem 2rem 0rem 0rem" h="100vh" minW="20vw" overflowY="scroll">
@@ -47,6 +40,8 @@ const LeftDetail = ({ beCode, allAttributesList }) => {
         <VStack spacing={5} bg="pink" p="4">
           <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={PRI_LOC1} />
           <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={PRI_LOC2} />
+          <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={PRI_LOC3} />
+          <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={PRI_LOC4} />
         </VStack>
         {map(({ attributeCode, attributeName }) => (
           <VStack key={attributeCode} w="60vw">
