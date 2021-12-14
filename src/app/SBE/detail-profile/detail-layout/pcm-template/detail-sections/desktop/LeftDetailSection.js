@@ -4,10 +4,8 @@ import Attribute from 'app/BE/attribute'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { map, reduce, includes } from 'ramda'
 import { Text as CText } from '@chakra-ui/react'
-import ImageType from 'app/DTT/upload/Image'
-import Social from 'app/DTT/social'
-import Text from 'app/DTT/text'
-import Video from 'app/DTT/video'
+import { useSelector } from 'react-redux'
+import { selectCode } from 'redux/db/selectors'
 
 const LeftDetail = ({ beCode, allAttributesList }) => {
   const cardBg = useColorModeValue('gray.200', 'gray.600')
@@ -20,15 +18,13 @@ const LeftDetail = ({ beCode, allAttributesList }) => {
     positionFive: 'PRI_MOBILE',
   }
 
-  // console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
-  //   allAttributesList,
-  //   positionFromAttribute,
-  // })
-
   const usedAttributes = Object.values(mapped)
 
+  const testPcm = useSelector(selectCode('PCM_TEST1', 'allAttributes'))
+
+  console.log('testPcm---->', { testPcm })
+
   const getFilteredAttributes = (usedAttributesList, allAttributesList) => {
-    console.log('allAttributesList', { allAttributesList, usedAttributes })
     return reduce((acc, attributeList) => {
       const { attributeCode } = attributeList
       acc = !includes(attributeCode)(usedAttributesList) ? acc.concat(attributeList) : acc
@@ -38,21 +34,12 @@ const LeftDetail = ({ beCode, allAttributesList }) => {
 
   const filteredAttributes = getFilteredAttributes(usedAttributes, allAttributesList)
 
-  // console.log('%c allAttributesList----->', 'color: gold; font-size: 20px', {
-  //   usedAttributes,
-  //   filteredAttributes,
-  // })
-
   const { positionOne, positionTwo, positionThree, positionFour, positionFive } = mapped
 
   return (
     <Box bg={cardBg} borderRadius="2rem 2rem 0rem 0rem" h="100vh" minW="20vw" overflowY="scroll">
       <VStack align="start" spacing={8} alignItems="center" pt="10">
         <VStack spacing={5} bg="pink" p="4">
-          <ImageType.Read />
-          <Social.Read />
-          <Text.Read />
-          <Video.Read />
           <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={positionOne} />
           <Attribute config={{ textStyle: 'head.1' }} code={beCode} attribute={positionTwo} />
           <Attribute config={{ color: '#3182CE' }} code={beCode} attribute={positionThree} />
