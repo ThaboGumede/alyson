@@ -75,7 +75,10 @@ export const formatAsk = (state: DBState, replace: Boolean) => (item: Item) => {
   initialiseKey(state, `${questionCode}@title`, name)
   initialiseKey(state, `${questionCode}@config`, safelyParseJson(html, {}))
 
-  if (replace) state[questionCode] = []
+  if (replace && questionCode !== 'QUE_PROJECT_SIDEBAR_GRP') {
+    console.log('triggered this')
+    state[questionCode] = []
+  }
 
   if (!childAsks.length) {
     initialiseKey(state, `${questionCode}@raw`, item)
