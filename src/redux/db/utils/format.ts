@@ -109,14 +109,16 @@ export const formatAsk = (state: DBState, replace: Boolean) => (item: Item) => {
 }
 
 export const formatAttribute = (state: DBState) => (item: Item) => {
-  const { code, dataType, description } = item || {}
+  const { code, dataType, description, icon } = item || {}
   const { dttCode } = dataType || {}
 
   const descriptionKey = `${code}@description`
+  const iconKey = `${code}@icon`
 
   state[code] = dttCode
   state[dttCode] = dataType
   state[descriptionKey] = description
+  state[iconKey] = icon
 }
 
 export const formatNotes = (state: DBState) => (item: Note) => {

@@ -10,16 +10,17 @@ import { useSelector } from 'react-redux'
 import { selectCode } from 'redux/db/selectors'
 
 const iconsBasedOnAttributes = {
-  PRI_EMAIL: faEnvelope,
-  PRI_MOBILE: faPhoneAlt,
-  _LNK_EDU_PROVIDER__PRI_NAME: faGraduationCap,
-  PRI_ADDRESS_FULL: faMapMarkerAlt,
-  ACT_PRI_EVENT_APPLY: faPlus,
+  faEnvelope,
+  faPhoneAlt,
+  faGraduationCap,
+  faMapMarkerAlt,
+  faPlus,
 }
 
-const GetIconstBasedOnAttributes = ({ code, attributeCode, config = {} }) => {
-  const data = useSelector(selectCode(code, attributeCode))
-  const icon = data?.icon || iconsBasedOnAttributes[attributeCode]
+const GetIconstBasedOnAttributes = ({ attributeCode, config = {} }) => {
+  const iconFromBackEnd = useSelector(selectCode(attributeCode, 'icon'))
+  const icon = iconsBasedOnAttributes[iconFromBackEnd]
+
   return <FontAwesomeIcon icon={icon} fixedWidth {...config} />
 }
 export const getIconsBasedOnAttributes = attributeCode => (
